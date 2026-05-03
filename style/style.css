@@ -151,7 +151,7 @@ img {
     color: white;
     max-width: 600px;
     text-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    background: linear-gradient(to right, rgba(0,0,0,0.3), transparent);
+    background: linear-gradient(to right, rgba(0,0,0,0.5), transparent);
     padding: 30px 40px;
     border-radius: 20px;
     backdrop-filter: blur(2px);
