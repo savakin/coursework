@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фотостудия</title>
+
+    <link rel="stylesheet" href="../style/style.css">
+    <Style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding-top: 80px;
+            line-height: 1.5;
+            color: #222;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+    </Style>
+</head>
+
+<body>
+    <main>
+        <header class="header">
+
+            <div class="logo">
+                <a href="./index.html"><img src="../img/logo.png" width="64" height="64" alt="логотип"></a>
+            </div>
+
+            <nav class="nav" id="nav">
+                <a href="./services.html">Услуги</a>
+                <a href="./reviews.html">Отзывы</a>
+                <a href="./questions.html" class="active">Вопросы</a>
+                <a href="./contacts.html">Контакты</a>
+            </nav>
+
+            <a href="./order.php" class="order-btn">
+                Заказать
+            </a>
+
+            <div class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </header>
+
+        <section class="faq" id="faq">
+            <h2>Частые вопросы</h2>
+
+            <div class="faq-item">
+                <button type="button" class="faq-question">Сколько стоит фотосессия?</button>
+                <div class="faq-answer">Стоимость начинается от 3000₽.</div>
+            </div>
+
+            <div class="faq-item">
+                <button type="button" class="faq-question">Сколько длится фотосессия?</button>
+                <div class="faq-answer">Фотосессия длится от 1 до 2 часов</div>
+            </div>
+
+            <div class="faq-item">
+                <button type="button" class="faq-question">Когда будут готовы фотографии?</button>
+                <div class="faq-answer">Обычно фотографии готовы через 3–5 дней.</div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="footer" id="contacts">
+
+        <div>
+            <p>Телефон: +7 900 000 0000</p>
+            <p>Email: info@mail.com</p>
+            <p>Адрес: Ярославль, ул.Победы, 22</p>
+        </div>
+
+        <div class="social">
+            <a href="https://vk.com/"><img src="../img/vk.png" alt="вк" width="32"></a>
+            <a href="https://web.telegram.org/"><img src="../img/tg.png" alt="тг" width="32"></a>
+            <a href="https://www.instagram.com/"><img src="../img/inst.png" alt="инста" width="32"></a>
+        </div>
+
+    </footer>
+
+    <script>
+        const faqQuestions = document.querySelectorAll(".faq-question");
+
+        faqQuestions.forEach(question => {
+            question.addEventListener("click", function () {
+                const answer = this.nextElementSibling;
+                const isOpen = answer.classList.contains("open");
+
+                faqQuestions.forEach(q => {
+                    const ans = q.nextElementSibling;
+                    ans.classList.remove("open");
+                    ans.style.maxHeight = null;
+                    ans.style.paddingTop = "0px";
+                    ans.style.paddingBottom = "0px";
+                    q.classList.remove("open");
+                });
+
+                if (!isOpen) {
+                    answer.classList.add("open");
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    answer.style.paddingTop = "20px";
+                    answer.style.paddingBottom = "25px";
+                    this.classList.add("open");
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

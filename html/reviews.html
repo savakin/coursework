@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы</title>
+
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/reviews.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo">
+            <a href="./index.html"><img src="../img/logo.png" width="64" height="64" alt="логотип"></a>
+        </div>
+
+        <nav class="nav">
+            <a href="./services.html">Услуги</a>
+            <a href="./reviews.html" class="active">Отзывы</a>
+            <a href="./questions.html">Вопросы</a>
+            <a href="./contacts.html">Контакты</a>
+        </nav>
+
+        <a href="./order.php" class="order-btn">Заказать</a>
+
+        <!-- бургер меню -->
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
+    </header>
+
+    <!-- ОТЗЫВЫ -->
+    <section class="reviews-page">
+
+        <h1>Отзывы клиентов</h1>
+
+        <div class="reviews-grid">
+
+            <!-- отзыв 1 -->
+            <div class="review-card">
+                <img src="../img/user1.jpg" alt="">
+                <h3>Анна</h3>
+
+                <div class="stars">★★★★★</div>
+
+                <p>Отличная фотостудия! Очень понравился результат, обязательно вернусь снова.</p>
+            </div>
+
+            <!-- отзыв 2 -->
+            <div class="review-card">
+                <img src="../img/user2.jpg" alt="">
+                <h3>Максим</h3>
+
+                <div class="stars">★★★★☆</div>
+
+                <p>Быстро сделали фото на документы, качество на высоте.</p>
+            </div>
+
+            <!-- отзыв 3 -->
+            <div class="review-card">
+                <img src="../img/user3.jpg" alt="">
+                <h3>Ирина</h3>
+
+                <div class="stars">★★★★★</div>
+
+                <p>Очень приятный фотограф, помог расслабиться на съемке.</p>
+            </div>
+
+            <!-- отзыв 4 -->
+            <div class="review-card">
+                <img src="../img/user4.jpg" alt="">
+                <h3>Дмитрий</h3>
+
+                <div class="stars">★★★★☆</div>
+
+                <p>Заказывал предметную съемку - результат превзошёл ожидания.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ФОРМА ОТЗЫВА -->
+    <section class="review-form">
+
+        <h2>Оставить отзыв</h2>
+
+        <form id="reviewForm">
+
+            <input type="text" name="name" placeholder="Ваше имя" required>
+
+            <select name="numberStars" required>
+                <option>Оценка</option>
+                <option value="5">5 ★</option>
+                <option value="4">4 ★</option>
+                <option value="3">3 ★</option>
+                <option value="2">2 ★</option>
+                <option value="1">1 ★</option>
+            </select>
+
+            <textarea name="comments" placeholder="Ваш отзыв" required></textarea>
+
+            <button type="submit">Отправить</button>
+
+        </form>
+        <div id="message" style="display:none; color:green; margin-top:10px;">
+            Отзыв отправлен
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div>
+            <p>Телефон: +7 900 000 0000</p>
+            <p>Email: info@mail.com</p>
+            <p>Адрес: Ярославль, ул.Победы, 22</p>
+        </div>
+
+        <div class="social">
+            <a href="https://vk.com/"><img src="../img/vk.png" alt="вк" width="32"></a>
+            <a href="https://web.telegram.org/"><img src="../img/tg.png" alt="тг" width="32"></a>
+            <a href="https://www.instagram.com/"><img src="../img/inst.png" alt="инста" width="32"></a>
+        </div>
+
+    </footer>
+
+    <script>
+        document.getElementById("reviewForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            fetch("../server/review.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    let message = document.getElementById("message");
+                    message.style.display = "block";
+
+                    document.getElementById("reviewForm").reset();
+
+                    setTimeout(() => {
+                        message.style.display = "none";
+                    }, 3000);
+                })
+                .catch(error => {
+                    console.error("Ошибка:", error);
+                });
+        });
+    </script>
+</body>
+
+
+</html>

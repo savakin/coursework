@@ -1,0 +1,53 @@
+/* ===== СТРАНИЦА УСЛУГ ===== */
+
+.services-page {
+    text-align: center;
+}
+
+.services-page h1 {
+    margin-bottom: 50px;
+}
+
+/* карточки */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    transition: 0.3s;
+    background: white;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.service-card img {
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* кнопка */
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+

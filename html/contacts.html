@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты</title>
+
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/contacts.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo">
+            <a href="./index.html"><img src="../img/logo.png" width="64" height="64" alt="логотип"></a>
+        </div>
+
+        <nav class="nav" id="nav">
+            <a href="./services.html">Услуги</a>
+            <a href="./reviews.html">Отзывы</a>
+            <a href="./questions.html">Вопросы</a>
+            <a href="./contacts.html" class="active">Контакты</a>
+        </nav>
+
+        <a href="./order.php" class="order-btn">Заказать</a>
+
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </header>
+
+    <!-- КОНТАКТЫ -->
+    <section class="contacts-page">
+
+        <h1>Контакты</h1>
+
+        <div class="contacts-container">
+
+            <!-- информация -->
+            <div class="contacts-info">
+
+                <h2>Свяжитесь с нами</h2>
+
+                <p><strong>Телефон:</strong> +7 900 000 0000</p>
+                <p><strong>Email:</strong> info@mail.com</p>
+                <p><strong>Адрес:</strong> Ярославль, ул.Победы, 22</p>
+
+
+            </div>
+
+            <!-- форма -->
+            <div class="contacts-form" id="form">
+
+                <h2>Написать нам</h2>
+
+                <form action="../server.php" method="POST">
+
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <textarea name="message" placeholder="Сообщение" required></textarea>
+
+                    <button type="submit">Отправить</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ЯНДЕКС КАРТА -->
+    <section class="map-section">
+
+        <h2>Мы на карте</h2>
+
+        <div id="map"></div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div>
+            <p>Телефон: +7 900 000 0000</p>
+            <p>Email: info@mail.com</p>
+            <p>Адрес: Ярославль, ул.Победы, 22</p>
+        </div>
+
+        <div class="social">
+            <a href="https://vk.com/"><img src="../img/vk.png" alt="вк" width="32" ></a>
+            <a href="https://web.telegram.org/"><img src="../img/tg.png" alt="тг" width="32" ></a>
+            <a href="https://www.instagram.com/"><img src="../img/inst.png" alt="инста" width="32" ></a>
+        </div>
+
+    </footer>
+
+    <!-- Яндекс API -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+
+    <script>
+        // ИНИЦИАЛИЗАЦИЯ КАРТЫ
+        ymaps.ready(init);
+
+        function init() {
+
+            var map = new ymaps.Map("map", {
+                center: [57.6356115555002, 39.872878232792296],
+                zoom: 15
+            });
+
+            var placemark = new ymaps.Placemark(
+                [57.6356115555002, 39.872878232792296],
+                {
+                    hintContent: "Наша компания",
+                    balloonContent: "Мы здесь!"
+                }
+            );
+
+            map.geoObjects.add(placemark);
+
+        }
+
+
+        const burger = document.getElementById("burger");
+        const nav = document.getElementById("nav");
+
+        if (burger && nav) {
+            burger.addEventListener("click", () => {
+                nav.classList.toggle("active");
+            });
+        }
+    </script>
+    <script src="../JS/script.js"></script>
+
+</body>
+
+</html>

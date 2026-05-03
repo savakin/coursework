@@ -1,0 +1,84 @@
+/* ===== СТРАНИЦА ОТЗЫВОВ ===== */
+
+.reviews-page {
+    text-align: center;
+}
+
+.reviews-page h1 {
+    margin-bottom: 50px;
+}
+
+/* сетка */
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+/* карточка */
+
+.review-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.review-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+/* звезды */
+
+.stars {
+    color: gold;
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+
+/* ===== ФОРМА ===== */
+
+.review-form {
+    padding: 80px 10%;
+    text-align: center;
+    background: #f5f5f5;
+}
+
+.review-form form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.review-form input,
+.review-form textarea,
+.review-form select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.review-form button {
+    padding: 12px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
