@@ -5,12 +5,11 @@ const nav = document.getElementById("nav");
 if (burger && nav) {
     burger.addEventListener("click", () => {
         nav.classList.toggle("active");
-        // Анимация бургера (превращение в крестик)
         burger.classList.toggle("open");
     });
 }
 
-// ===== HERO СЛАЙДЕР (ручное + авто) =====
+// ===== HERO СЛАЙДЕР =====
 let slides = document.querySelectorAll(".slide");
 let index = 0;
 const prevBtn = document.querySelector(".prev");
@@ -54,7 +53,7 @@ if (prevBtn && nextBtn) {
 // Автопрокрутка
 function startAutoSlide() {
     if (slides.length > 1) {
-        slideInterval = setInterval(nextSlide, 8000); // 8 секунд
+        slideInterval = setInterval(nextSlide, 8000); 
     }
 }
 

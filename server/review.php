@@ -17,11 +17,9 @@ $name = $_POST['name'];
 $comments = $_POST['comments'];
 $numberStars = $_POST['numberStars'];
 
-// SQL-запрос
 $sql = "INSERT INTO reviews (name, comments, numberStars)
         VALUES (?, ?, ?)";
 
-// Подготовленный запрос (защита от SQL-инъекций)
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssi", $name, $comments, $numberStars);
 

@@ -12,7 +12,6 @@ const services = {
     'product': { name: 'Предметная съемка', formType: 'photo', price: 2000 }
 };
 
-// Храним название услуги и цену в переменных
 let currentService = '';
 let currentPrice = 0;
 
@@ -25,23 +24,19 @@ const docForm = document.getElementById('doc-form');
 const serviceBtns = document.querySelectorAll('.service-btn');
 
 // Функция открытия модального окна
-// Функция открытия модального окна
 function openModal(serviceName, formType, price = 0) {
     currentService = serviceName;
     currentPrice = price;
     modalTitle.textContent = serviceName;
     
-    // Показываем нужную форму
     if (formType === 'photo') {
         photoForm.style.display = 'block';
         docForm.style.display = 'none';
-        // Заполняем скрытое поле названием услуги
         document.getElementById('photo-service-name').value = serviceName;
         calculatePhotoPrice();
     } else {
         photoForm.style.display = 'none';
         docForm.style.display = 'block';
-        // Заполняем скрытое поле названием услуги
         document.getElementById('doc-service-name').value = serviceName;
         calculateDocPrice();
     }
@@ -61,7 +56,7 @@ serviceBtns.forEach(btn => {
     btn.addEventListener('click', function() {
         const type = this.getAttribute('data-type');
         const serviceName = this.textContent.trim();
-        const price = Number(this.dataset.price) || 0; // ← БЕРЁМ ЦЕНУ ИЗ data-price
+        const price = Number(this.dataset.price) || 0; 
         openModal(serviceName, type, price);
     });
 });
@@ -71,25 +66,20 @@ function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     
-    // Очищаем ВСЕ поля в обеих формах
     if (photoForm) {
         photoForm.reset();
-        // Сбрасываем итоговую сумму
         if (photoTotal) photoTotal.textContent = '0';
         if (photoPriceInput) photoPriceInput.value = '0';
     }
     
     if (docForm) {
         docForm.reset();
-        // Сбрасываем итоговую сумму
         if (total) total.textContent = '0';
         if (priceInput) priceInput.value = '0';
     }
     
-    // Сбрасываем цену
     currentPrice = 0;
     
-    // Очищаем URL от параметра
     if (serviceType) {
         window.history.replaceState({}, document.title, window.location.pathname);
     }
@@ -104,13 +94,11 @@ modal.addEventListener('click', (e) => {
 
 // ===== ОТПРАВКА ФОРМ =====
 photoForm.addEventListener('submit', (e) => {
-    // Проверяем, что цена посчитана
     if (!photoPriceInput.value || photoPriceInput.value === '0') {
         e.preventDefault();
         alert('Укажите количество часов');
         return;
     }
-    // После успешной отправки очищаем (небольшая задержка для отправки)
     setTimeout(() => {
         photoForm.reset();
         if (photoTotal) photoTotal.textContent = '0';
@@ -121,13 +109,11 @@ photoForm.addEventListener('submit', (e) => {
 });
 
 docForm.addEventListener('submit', (e) => {
-    // Проверяем, что цена посчитана
     if (!priceInput.value || priceInput.value === '0') {
         e.preventDefault();
         alert('Заполните все поля и укажите количество');
         return;
     }
-    // После успешной отправки очищаем
     setTimeout(() => {
         docForm.reset();
         if (total) total.textContent = '0';
@@ -192,14 +178,12 @@ function calculatePhotoPrice() {
     photoPriceInput.value = result;
 }
 
-// при изменении количества
 if (photoQty) {
     photoQty.addEventListener("input", calculatePhotoPrice);
 }
 
 // ===== ОТПРАВКА ФОРМ =====
 photoForm.addEventListener('submit', (e) => {
-    // Проверяем, что цена посчитана
     if (!photoPriceInput.value || photoPriceInput.value === '0') {
         e.preventDefault();
         alert('Укажите количество часов');
@@ -208,7 +192,6 @@ photoForm.addEventListener('submit', (e) => {
 });
 
 docForm.addEventListener('submit', (e) => {
-    // Проверяем, что цена посчитана
     if (!priceInput.value || priceInput.value === '0') {
         e.preventDefault();
         alert('Заполните все поля и укажите количество');

@@ -6,7 +6,7 @@ html {
 body {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
-    padding-top: 80px; /* увеличен отступ под фиксированную шапку */
+    padding-top: 80px;
     line-height: 1.5;
     color: #222;
 }
@@ -92,7 +92,7 @@ img {
     transition: background 0.2s, transform 0.1s;
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .order-btn:hover {
@@ -150,8 +150,8 @@ img {
     left: 8%;
     color: white;
     max-width: 600px;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    background: linear-gradient(to right, rgba(0,0,0,0.5), transparent);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent);
     padding: 30px 40px;
     border-radius: 20px;
     backdrop-filter: blur(2px);
@@ -177,7 +177,8 @@ img {
 
 
 
-.prev, .next {
+.prev,
+.next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -193,7 +194,8 @@ img {
     z-index: 10;
 }
 
-.prev:hover, .next:hover {
+.prev:hover,
+.next:hover {
     background: rgba(0, 0, 0, 0.7);
 }
 
@@ -222,13 +224,13 @@ img {
     padding: 20px 10px;
     background: white;
     border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
     transition: transform 0.2s;
 }
 
 .card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 16px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
 }
 
 .card img {
@@ -264,12 +266,12 @@ img {
     cursor: pointer;
     border-radius: 20px;
     transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
 }
 
 .gallery img:hover {
     transform: scale(1.02);
-    box-shadow: 0 16px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
 }
 
 /* ===== LIGHTBOX ===== */
@@ -291,7 +293,7 @@ img {
     max-width: 85%;
     max-height: 85%;
     border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 .close {
@@ -309,12 +311,13 @@ img {
     opacity: 1;
 }
 
-.lb-prev, .lb-next {
+.lb-prev,
+.lb-next {
     position: absolute;
     top: 50%;
     font-size: 48px;
     color: white;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
     border: none;
     cursor: pointer;
     border-radius: 50%;
@@ -327,8 +330,9 @@ img {
     transition: background 0.2s;
 }
 
-.lb-prev:hover, .lb-next:hover {
-    background: rgba(255,255,255,0.3);
+.lb-prev:hover,
+.lb-next:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .lb-prev {
@@ -353,13 +357,13 @@ img {
     border-radius: 24px;
     text-align: center;
     background: white;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     transition: all 0.2s;
 }
 
 .service-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
 
 /* ===== ОТЗЫВЫ ===== */
@@ -375,7 +379,7 @@ img {
     padding: 30px 25px;
     background: #fff;
     border-radius: 30px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
     border: 1px solid #eee;
 }
 
@@ -390,7 +394,7 @@ img {
     border: none;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     background: white;
 }
 
@@ -426,7 +430,7 @@ img {
 
 .faq-answer {
     max-height: 0;
-    overflow: hidden; 
+    overflow: hidden;
     transition: max-height 0.4s ease, padding 0.3s ease;
     padding: 0 25px;
     background: white;
@@ -439,7 +443,7 @@ img {
     max-height: 500px;
     padding-top: 20px;
     padding-bottom: 25px;
-    overflow: visible; 
+    overflow: visible;
 }
 
 /* ===== FOOTER ===== */
@@ -449,7 +453,7 @@ img {
     padding: 40px 50px;
     display: flex;
     justify-content: space-between;
-    align-items:end;
+    align-items: end;
     flex-wrap: wrap;
     gap: 30px;
     margin-top: 60px;
@@ -479,6 +483,7 @@ img {
     width: 36px;
     height: 36px;
 }
+
 .nav .nav-order-btn {
     display: none;
 }
@@ -490,55 +495,50 @@ img {
     .header {
         padding: 12px 20px;
     }
-    
+
     .nav a {
         font-size: 1.1rem;
     }
-    
+
     .hero-content h1 {
         font-size: 2.5rem;
     }
-    
+
     .hero-content {
         bottom: 10%;
         left: 5%;
         padding: 20px 30px;
     }
-    
+
     .slide img {
         height: 450px;
     }
-    
+
     .advantages {
         gap: 20px;
     }
-    
+
     .card {
         width: 160px;
     }
 
 }
 
-
-@media (max-width: 768px) {
-
-}
-/* Мобильные устройства (ширина ≤ 768px) */
-@media (max-width: 768px) {
+/* Мобильные устройства (ширина < 768px) */
+@media (max-width: 767px) {
     body {
         padding-top: 70px;
     }
-    
+
     .header {
         padding: 10px 20px;
     }
-    
+
     .logo img {
         width: 48px;
         height: 48px;
     }
 
-    /* Бургер-меню */
     .nav {
         display: none;
         flex-direction: column;
@@ -549,150 +549,170 @@ img {
         background: white;
         padding: 20px 30px;
         gap: 20px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         border-radius: 0 0 20px 20px;
     }
-    
+
     .nav.active {
         display: flex;
     }
-    
+
     .nav a {
         font-size: 1.3rem;
         padding: 12px 0;
         border-bottom: 1px solid #eee;
     }
+
     .nav.active .nav-order-btn {
         display: block;
         width: 100%;
         text-align: center;
-        margin-top: 10px; 
+        margin-top: 10px;
     }
+
     .burger {
         display: flex;
     }
-    
+
     .order-btn {
         display: none;
     }
-    
-    /* Hero */
+
     .slide img {
         height: 350px;
     }
-    
+
     .hero-content {
         bottom: 5%;
         left: 5%;
         right: 5%;
         padding: 15px 20px;
-        background: rgba(0,0,0,0.4);
-        backdrop-filter: blur(4px);
+        backdrop-filter: none;
+        background: rgba(0, 0, 0, 0.6);
     }
-    
+
     .hero-content h1 {
         font-size: 1.8rem;
     }
-    
+
     .hero-content ul {
         font-size: 1rem;
     }
-    
-    .prev, .next {
+
+    .prev,
+    .next {
         font-size: 2rem;
         padding: 8px 14px;
     }
-    
-    /* Преимущества */
+
     .advantages {
         flex-direction: column;
         align-items: center;
         padding: 30px 10px;
     }
-    
+
     .card {
         width: 90%;
         max-width: 300px;
     }
-    
-    /* Галерея */
+
     .gallery {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
     .gallery img {
         height: 250px;
     }
-    
-    /* Lightbox */
-    .lb-prev, .lb-next {
+
+    .lb-prev,
+    .lb-next {
         width: 48px;
         height: 48px;
         font-size: 36px;
     }
-    
+
     .close {
         top: 20px;
         right: 25px;
         font-size: 40px;
     }
-    
-    /* FAQ */
+
     .faq-question {
         font-size: 1.1rem;
         padding: 16px 20px;
     }
-    
-    /* Footer */
-    .footer {
 
+    .footer {
+        flex-direction: column;
         text-align: center;
         padding: 30px 20px;
+        align-items: center;
+        justify-content: center;
     }
-    
+
+    .footer div:first-child {
+        text-align: center;
+    }
+
     .social {
         justify-content: center;
     }
 
-    .prev, .next{
+    .prev,
+    .next {
         visibility: hidden;
+    }
+
+    .burger.open span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .burger.open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
     }
 }
 
-/* Очень маленькие экраны (≤ 480px) */
+/*  маленькие экраны (≤ 480px) */
 @media (max-width: 480px) {
     .hero-content h1 {
         font-size: 1.5rem;
     }
-    
+
     .hero-content ul {
         font-size: 0.9rem;
     }
+
     .nav.active .nav-order-btn {
         display: block;
         width: 100%;
         text-align: center;
-        margin-top: 10px; 
+        margin-top: 10px;
     }
+
     .slide img {
         height: 280px;
     }
-    
-    .prev, .next {
+
+    .prev,
+    .next {
         font-size: 1.8rem;
         padding: 6px 12px;
     }
-    
+
     .nav a {
         font-size: 1.2rem;
     }
-    
+
     .card img {
         width: 56px;
         height: 56px;
     }
-    
+
     .footer {
         align-items: center;
         font-size: 0.9rem;

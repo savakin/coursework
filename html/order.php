@@ -32,7 +32,6 @@
             Заказать
         </a>
 
-        <!-- бургер меню -->
         <div class="burger" id="burger">
             <span></span>
             <span></span>

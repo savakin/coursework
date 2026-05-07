@@ -11,9 +11,8 @@ $comments = $_POST['comments'] ?? null;
 $type_order = $_POST['type_order'];
 
 // ===== ОПРЕДЕЛЯЕМ id_typeservice =====
-$serviceName = $_POST['service_name'] ?? ''; // Название услуги из скрытого поля
+$serviceName = $_POST['service_name'] ?? '';
 
-// Ищем id_typeservice по названию
 $stmt = $conn->prepare("SELECT id_typeservice FROM typeservice WHERE name = ?");
 $stmt->bind_param("s", $serviceName);
 $stmt->execute();
@@ -23,7 +22,6 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $id_typeservice = $row['id_typeservice'];
 } else {
-    // Если услуга не найдена — ставим NULL или 1 (по умолчанию)
     $id_typeservice = null;
 }
 

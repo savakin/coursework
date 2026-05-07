@@ -13,10 +13,10 @@
     display: flex;
     gap: 50px;
     flex-wrap: wrap;
+    align-items: center; 
 }
 
 /* инфо */
-
 .contacts-info {
     flex: 1;
     min-width: 300px;
@@ -27,7 +27,6 @@
 }
 
 /* форма */
-
 .contacts-form {
     flex: 1;
     min-width: 300px;
@@ -44,6 +43,12 @@
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-family: inherit; 
+}
+
+.contacts-form textarea {
+    resize: vertical;
+    min-height: 100px;
 }
 
 .contacts-form button {
@@ -52,11 +57,14 @@
     color: white;
     border: none;
     cursor: pointer;
+    transition: background 0.2s; 
 }
 
+.contacts-form button:hover {
+    background: #333; 
+}
 
 /* ===== КАРТА ===== */
-
 .map-section {
     padding: 40px 10%;
     text-align: center;
@@ -69,3 +77,16 @@
     overflow: hidden;
 }
 
+@media (max-width: 768px) {
+    .contacts-container {
+        align-items: stretch;
+    }
+    
+    .contacts-page {
+        padding: 30px 5%;
+    }
+    
+    .map-section {
+        padding: 30px 5%;
+    }
+}
