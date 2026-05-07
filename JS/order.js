@@ -2,18 +2,19 @@
 const urlParams = new URLSearchParams(window.location.search);
 const serviceType = urlParams.get('type');
 
-// Сопоставление типов услуг
+// Сопоставление типов услуг (теперь только для автооткрытия)
 const services = {
-    'studio': { name: 'Студийная фотосессия', formType: 'photo', price: 3000 },
-    'wedding': { name: 'Свадебная съемка', formType: 'photo', price: 15000 },
-    'documents': { name: 'Фото на документы', formType: 'doc', price: 500 },
-    'retouch': { name: 'Обработка фото', formType: 'doc', price: 300 },
-    'lovestory': { name: 'Love Story съемка', formType: 'photo', price: 4000 },
-    'product': { name: 'Предметная съемка', formType: 'photo', price: 2000 }
+    'studio': { name: 'Студийная фотосессия', formType: 'photo' },
+    'wedding': { name: 'Свадебная съемка', formType: 'photo' },
+    'documents': { name: 'Фото на документы', formType: 'doc' },
+    'retouch': { name: 'Обработка фото', formType: 'doc' },
+    'lovestory': { name: 'Love Story съемка', formType: 'photo' },
+    'product': { name: 'Предметная съемка', formType: 'photo' }
 };
 
 let currentService = '';
 let currentPrice = 0;
+let currentServiceId = 0;
 
 // ===== МОДАЛЬНОЕ ОКНО =====
 const modal = document.getElementById('modal');
@@ -23,21 +24,40 @@ const photoForm = document.getElementById('photo-form');
 const docForm = document.getElementById('doc-form');
 const serviceBtns = document.querySelectorAll('.service-btn');
 
-// Функция открытия модального окна
-function openModal(serviceName, formType, price = 0) {
+function openModal(serviceName, formType, price = 0, serviceId = 0) {
     currentService = serviceName;
     currentPrice = price;
+    currentServiceId = serviceId;
     modalTitle.textContent = serviceName;
     
     if (formType === 'photo') {
         photoForm.style.display = 'block';
         docForm.style.display = 'none';
         document.getElementById('photo-service-name').value = serviceName;
+        // Добавляем service_id в скрытое поле
+        let photoServiceId = document.getElementById('photo-service-id');
+        if (!photoServiceId) {
+            photoServiceId = document.createElement('input');
+            photoServiceId.type = 'hidden';
+            photoServiceId.name = 'service_id';
+            photoServiceId.id = 'photo-service-id';
+            photoForm.appendChild(photoServiceId);
+        }
+        photoServiceId.value = serviceId;
         calculatePhotoPrice();
     } else {
         photoForm.style.display = 'none';
         docForm.style.display = 'block';
         document.getElementById('doc-service-name').value = serviceName;
+        let docServiceId = document.getElementById('doc-service-id');
+        if (!docServiceId) {
+            docServiceId = document.createElement('input');
+            docServiceId.type = 'hidden';
+            docServiceId.name = 'service_id';
+            docServiceId.id = 'doc-service-id';
+            docForm.appendChild(docServiceId);
+        }
+        docServiceId.value = serviceId;
         calculateDocPrice();
     }
     
@@ -45,137 +65,105 @@ function openModal(serviceName, formType, price = 0) {
     document.body.style.overflow = 'hidden';
 }
 
-// ===== АВТООТКРЫТИЕ ПРИ ПЕРЕХОДЕ ИЗ УСЛУГ =====
+// ===== АВТООТКРЫТИЕ =====
 if (serviceType && services[serviceType]) {
-    const { name, formType, price } = services[serviceType];
-    setTimeout(() => openModal(name, formType, price), 300);
+    const { name, formType } = services[serviceType];
+    // Нужно получить цену и id из кнопки или отдельным запросом
+    setTimeout(() => {
+        const btn = Array.from(serviceBtns).find(b => b.textContent.trim() === name);
+        if (btn) {
+            const price = Number(btn.dataset.price) || 0;
+            const serviceId = Number(btn.dataset.serviceId) || 0;
+            openModal(name, formType, price, serviceId);
+        }
+    }, 300);
 }
 
-// ===== КНОПКИ УСЛУГ НА СТРАНИЦЕ =====
+// ===== КНОПКИ УСЛУГ =====
 serviceBtns.forEach(btn => {
     btn.addEventListener('click', function() {
         const type = this.getAttribute('data-type');
         const serviceName = this.textContent.trim();
-        const price = Number(this.dataset.price) || 0; 
-        openModal(serviceName, type, price);
+        const price = Number(this.dataset.price) || 0;
+        const serviceId = Number(this.dataset.serviceId) || 0;
+        openModal(serviceName, type, price, serviceId);
     });
 });
 
-// ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
+// ===== ЗАКРЫТИЕ =====
 function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     
     if (photoForm) {
         photoForm.reset();
+        const photoTotal = document.getElementById('photo-total');
+        const photoPriceInput = document.getElementById('photo-price');
         if (photoTotal) photoTotal.textContent = '0';
         if (photoPriceInput) photoPriceInput.value = '0';
     }
     
     if (docForm) {
         docForm.reset();
+        const total = document.getElementById('total-price');
+        const priceInput = document.getElementById('price');
         if (total) total.textContent = '0';
         if (priceInput) priceInput.value = '0';
     }
     
     currentPrice = 0;
+    currentServiceId = 0;
     
     if (serviceType) {
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 }
 
-closeBtn.addEventListener('click', closeModal);
-
-modal.addEventListener('click', (e) => {
+if (closeBtn) closeBtn.addEventListener('click', closeModal);
+if (modal) modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
 });
 
-
-// ===== ОТПРАВКА ФОРМ =====
-photoForm.addEventListener('submit', (e) => {
-    if (!photoPriceInput.value || photoPriceInput.value === '0') {
-        e.preventDefault();
-        alert('Укажите количество часов');
-        return;
-    }
-    setTimeout(() => {
-        photoForm.reset();
-        if (photoTotal) photoTotal.textContent = '0';
-        if (photoPriceInput) photoPriceInput.value = '0';
-        currentPrice = 0;
-        closeModal();
-    }, 100);
-});
-
-docForm.addEventListener('submit', (e) => {
-    if (!priceInput.value || priceInput.value === '0') {
-        e.preventDefault();
-        alert('Заполните все поля и укажите количество');
-        return;
-    }
-    setTimeout(() => {
-        docForm.reset();
-        if (total) total.textContent = '0';
-        if (priceInput) priceInput.value = '0';
-        closeModal();
-    }, 100);
-});
-
-
-// ===== РАСЧЁТ ДЛЯ DOC =====
-
-const formatPrices = {
-    1: 100,
-    2: 150,
-    3: 200
-};
-
-const typePrices = {
-    1: 10,
-    2: 20
-};
-
-const format = document.getElementById("format");
-const type = document.getElementById("type");
-const quantity = document.getElementById("quantity");
-const total = document.getElementById("total-price");
+// ===== РАСЧЁТ ДЛЯ DOC (с ценами из data-атрибутов) =====
+const formatSelect = document.getElementById("format");
+const typeSelect = document.getElementById("type");
+const quantityInput = document.getElementById("quantity");
+const totalSpan = document.getElementById("total-price");
 const priceInput = document.getElementById("price");
 
 function calculateDocPrice() {
-    if (!format || !type || !quantity) return;
+    if (!formatSelect || !typeSelect || !quantityInput) return;
 
-    const formatPrice = formatPrices[format.value] || 0;
-    const typePrice = typePrices[type.value] || 0;
-    const qty = quantity.value || 0;
+    const selectedFormat = formatSelect.options[formatSelect.selectedIndex];
+    const selectedType = typeSelect.options[typeSelect.selectedIndex];
+    
+    const formatPrice = selectedFormat ? Number(selectedFormat.dataset.price) || 0 : 0;
+    const typePrice = selectedType ? Number(selectedType.dataset.price) || 0 : 0;
+    const qty = Number(quantityInput.value) || 0;
 
     const result = (formatPrice + typePrice) * qty;
 
-    total.textContent = result;
-    priceInput.value = result;
+    if (totalSpan) totalSpan.textContent = result;
+    if (priceInput) priceInput.value = result;
 }
 
-if (format && type && quantity) {
-    format.addEventListener("change", calculateDocPrice);
-    type.addEventListener("change", calculateDocPrice);
-    quantity.addEventListener("input", calculateDocPrice);
+if (formatSelect && typeSelect && quantityInput) {
+    formatSelect.addEventListener("change", calculateDocPrice);
+    typeSelect.addEventListener("change", calculateDocPrice);
+    quantityInput.addEventListener("input", calculateDocPrice);
 }
 
-
-// ===== РАСЧЁТ ДЛЯ PHOTO =====
-
+// ===== РАСЧЁТ ДЛЯ PHOTO (цена за час из currentPrice) =====
 const photoQty = document.getElementById("photo-quantity");
 const photoTotal = document.getElementById("photo-total");
 const photoPriceInput = document.getElementById("photo-price");
 
 function calculatePhotoPrice() {
     if (!photoQty) return;
-
-    const qty = photoQty.value || 0;
+    const qty = Number(photoQty.value) || 0;
     const result = currentPrice * qty;
-
-    photoTotal.textContent = result;
-    photoPriceInput.value = result;
+    if (photoTotal) photoTotal.textContent = result;
+    if (photoPriceInput) photoPriceInput.value = result;
 }
 
 if (photoQty) {
@@ -183,18 +171,20 @@ if (photoQty) {
 }
 
 // ===== ОТПРАВКА ФОРМ =====
-photoForm.addEventListener('submit', (e) => {
-    if (!photoPriceInput.value || photoPriceInput.value === '0') {
-        e.preventDefault();
-        alert('Укажите количество часов');
-        return;
-    }
-});
+if (photoForm) {
+    photoForm.addEventListener('submit', (e) => {
+        if (!photoPriceInput || !photoPriceInput.value || photoPriceInput.value === '0') {
+            e.preventDefault();
+            alert('Укажите количество часов');
+        }
+    });
+}
 
-docForm.addEventListener('submit', (e) => {
-    if (!priceInput.value || priceInput.value === '0') {
-        e.preventDefault();
-        alert('Заполните все поля и укажите количество');
-        return;
-    }
-});
+if (docForm) {
+    docForm.addEventListener('submit', (e) => {
+        if (!priceInput || !priceInput.value || priceInput.value === '0') {
+            e.preventDefault();
+            alert('Выберите формат, тип бумаги и укажите количество фото');
+        }
+    });
+}

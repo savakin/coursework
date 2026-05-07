@@ -39,23 +39,41 @@
         </div>
 
     </header>
-    <!-- ВЫБОР УСЛУГИ -->
-    <section class="order-page">
+<!-- ВЫБОР УСЛУГИ -->
+<section class="order-page">
 
-        <h1>Выберите услугу</h1>
+    <h1>Выберите услугу</h1>
 
-        <div class="services-grid">
+    <div class="services-grid">
+        <?php
+        $conn = new mysqli("localhost", "root", "", "course");
+        
+        // Получаем все услуги из БД с ценами
+        $result = $conn->query("SELECT id_typeservice, name, price FROM typeservice");
+        
+        // Маппинг type для JS (photo/doc)
+        $photoTypes = ['Студийная фотосессия', 'Свадебная съемка', 'Love Story съемка', 'Предметная съемка'];
+        $docTypes = ['Фото на документы', 'Обработка фото'];
+        
+        while ($row = $result->fetch_assoc()) {
+            $serviceName = $row['name'];
+            $price = $row['price'];
+            
+            // Определяем тип (photo или doc)
+            if (in_array($serviceName, $photoTypes)) {
+                $dataType = 'photo';
+            } else {
+                $dataType = 'doc';
+            }
+            
+            echo "<button class='service-btn' data-type='{$dataType}' data-price='{$price}' data-service-id='{$row['id_typeservice']}'>{$serviceName}</button>";
+        }
+        
+        $conn->close();
+        ?>
+    </div>
 
-            <button class="service-btn" data-type="photo" data-price="3000">Студийная фотосессия</button>
-            <button class="service-btn" data-type="photo" data-price="15000">Свадебная съемка</button>
-            <button class="service-btn" data-type="doc" data-price="500">Фото на документы</button>
-            <button class="service-btn" data-type="doc" data-price="300">Обработка фото</button>
-            <button class="service-btn" data-type="photo" data-price="4000">Love Story съемка</button>
-            <button class="service-btn" data-type="photo" data-price="2000">Предметная съемка</button>
-
-        </div>
-
-    </section>
+</section>
 
     <!-- MODAL -->
     <div class="modal" id="modal">  
@@ -92,9 +110,9 @@
                 <option value="">Формат фото</option>
                 <?php
                     $conn = new mysqli("localhost", "root", "", "course");
-                    $result = $conn->query("SELECT id_format, name FROM formats");
+                    $result = $conn->query("SELECT id_format, name, price FROM formats");
                     while ($row = $result->fetch_assoc()) {
-                        echo "<option value='{$row['id_format']}'>{$row['name']}</option>";
+                        echo "<option value='{$row['id_format']}' data-price='{$row['price']}'>{$row['name']} ({$row['price']} ₽/шт)</option>";
                     }
                 ?>
             </select>
@@ -102,14 +120,14 @@
             <select name="type" id="type" required>
                 <option value="">Тип бумаги</option>
                 <?php
-                    $result = $conn->query("SELECT id_type, name FROM types");
+                    $result = $conn->query("SELECT id_type, name, price FROM types");
                     while ($row = $result->fetch_assoc()) {
-                        echo "<option value='{$row['id_type']}'>{$row['name']}</option>";
+                        echo "<option value='{$row['id_type']}' data-price='{$row['price']}'>{$row['name']} (+{$row['price']} ₽/шт)</option>";
                     }
                 ?>
             </select>
 
-            <input type="text" name="links" placeholder="Ссылка на Яндекс/Google Диск">
+            <input type="text" name="links" placeholder="Ссылка на Яндекс/Google Диск" required>
 
             <input type="number" name="quantity" id="quantity" placeholder="Количество фото" required min="1">
 
@@ -147,7 +165,7 @@
     </footer>
 
     <script src="../JS/order.js"></script>
+    <script src="../JS/script.js"></script>
 
 </body>
-
 </html>

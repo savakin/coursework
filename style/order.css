@@ -101,3 +101,11 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background: #333;
 }
+
+.modal .close {
+    color: #000;
+}
+
+.modal .close:hover {
+    color: #555;
+}

@@ -11,18 +11,19 @@ $comments = $_POST['comments'] ?? null;
 $type_order = $_POST['type_order'];
 
 // ===== ОПРЕДЕЛЯЕМ id_typeservice =====
-$serviceName = $_POST['service_name'] ?? '';
+// Теперь получаем ID из скрытого поля или по имени
+$service_id = $_POST['service_id'] ?? null;
 
-$stmt = $conn->prepare("SELECT id_typeservice FROM typeservice WHERE name = ?");
-$stmt->bind_param("s", $serviceName);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $id_typeservice = $row['id_typeservice'];
+if ($service_id) {
+    $id_typeservice = $service_id;
 } else {
-    $id_typeservice = null;
+    $serviceName = $_POST['service_name'] ?? '';
+    $stmt = $conn->prepare("SELECT id_typeservice FROM typeservice WHERE name = ?");
+    $stmt->bind_param("s", $serviceName);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $id_typeservice = $row['id_typeservice'] ?? null;
 }
 
 // ===== ПОЛЬЗОВАТЕЛЬ =====
