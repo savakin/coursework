@@ -25,6 +25,7 @@
             <a href="./reviews.html">Отзывы</a>
             <a href="./questions.html">Вопросы</a>
             <a href="./contacts.html">Контакты</a>
+            <a href="./order.php" class="order-btn nav-order-btn">Заказать</a>
         </nav>
 
         <a href="./order.php" class="order-btn">

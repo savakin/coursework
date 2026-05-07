@@ -479,6 +479,9 @@ img {
     width: 36px;
     height: 36px;
 }
+.nav .nav-order-btn {
+    display: none;
+}
 
 /* ===== АДАПТИВНОСТЬ ===== */
 
@@ -516,6 +519,10 @@ img {
 
 }
 
+
+@media (max-width: 768px) {
+
+}
 /* Мобильные устройства (ширина ≤ 768px) */
 @media (max-width: 768px) {
     body {
@@ -530,7 +537,7 @@ img {
         width: 48px;
         height: 48px;
     }
-    
+
     /* Бургер-меню */
     .nav {
         display: none;
@@ -555,13 +562,18 @@ img {
         padding: 12px 0;
         border-bottom: 1px solid #eee;
     }
-    
+    .nav.active .nav-order-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px; 
+    }
     .burger {
         display: flex;
     }
     
     .order-btn {
-        display: none; /* скрываем на мобильных, можно добавить в бургер при желании */
+        display: none;
     }
     
     /* Hero */
@@ -634,7 +646,7 @@ img {
     
     /* Footer */
     .footer {
-        flex-direction: column;
+
         text-align: center;
         padding: 30px 20px;
     }
@@ -657,7 +669,12 @@ img {
     .hero-content ul {
         font-size: 0.9rem;
     }
-    
+    .nav.active .nav-order-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px; 
+    }
     .slide img {
         height: 280px;
     }
@@ -677,6 +694,7 @@ img {
     }
     
     .footer {
+        align-items: center;
         font-size: 0.9rem;
     }
 }
