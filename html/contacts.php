@@ -1,3 +1,51 @@
+<?php
+$host = "localhost";
+$user = "root";
+$password = "";
+$dbname = "course";
+
+$conn = new mysqli($host, $user, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Ошибка подключения: " . $conn->connect_error);
+}
+
+$conn->set_charset("utf8mb4");
+
+$formMessage = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $question = trim($_POST['message'] ?? '');
+    
+    if (!empty($name) && !empty($email) && !empty($question)) {
+        
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            
+            $stmt = $conn->prepare("INSERT INTO quest (name, email, question) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $name, $email, $question);
+            
+            if ($stmt->execute()) {
+                $formMessage = "Ваше сообщение успешно отправлено!";
+            } else {
+                $formMessage = "Ошибка при отправке: " . $stmt->error;
+            }
+            
+            $stmt->close();
+            
+        } else {
+            $formMessage = "Пожалуйста, укажите корректный email.";
+        }
+        
+    } else {
+        $formMessage = "Пожалуйста, заполните все поля формы.";
+    }
+}
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -23,7 +71,7 @@
             <a href="./services.html">Услуги</a>
             <a href="./reviews.html">Отзывы</a>
             <a href="./questions.html">Вопросы</a>
-            <a href="./contacts.html" class="active">Контакты</a>
+            <a href="./contacts.php" class="active">Контакты</a>
             <a href="./order.php" class="order-btn nav-order-btn">Заказать</a>
         </nav>
 
@@ -60,8 +108,12 @@
             <div class="contacts-form" id="form">
 
                 <h2>Написать нам</h2>
+                
+                <?php if (!empty($formMessage)): ?>
+                    <p style="color: green; margin-bottom: 15px;"><?php echo htmlspecialchars($formMessage); ?></p>
+                <?php endif; ?>
 
-                <form action="../server.php" method="POST">
+                <form action="" method="POST">
 
                     <input type="text" name="name" placeholder="Ваше имя" required>
                     <input type="email" name="email" placeholder="Email" required>
@@ -128,7 +180,6 @@
             map.geoObjects.add(placemark);
 
         }
-
 
         const burger = document.getElementById("burger");
         const nav = document.getElementById("nav");

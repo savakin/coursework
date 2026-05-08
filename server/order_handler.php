@@ -5,11 +5,13 @@ if ($conn->connect_error) {
     die("Ошибка подключения: " . $conn->connect_error);
 }
 
-$name = $_POST['name'];
-$phone = $_POST['phone'];
+$name = isset($_POST['name']) ? trim($_POST['name']) : '';
+$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
 $comments = $_POST['comments'] ?? null;
 $type_order = $_POST['type_order'];
-
+if (empty($name) || empty($phone)) {
+    die("Имя или телефон не получены");
+}
 // ===== ОПРЕДЕЛЯЕМ id_typeservice =====
 // Теперь получаем ID из скрытого поля или по имени
 $service_id = $_POST['service_id'] ?? null;

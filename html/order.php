@@ -24,7 +24,7 @@
             <a href="./services.html">Услуги</a>
             <a href="./reviews.html">Отзывы</a>
             <a href="./questions.html">Вопросы</a>
-            <a href="./contacts.html">Контакты</a>
+            <a href="./contacts.php">Контакты</a>
             <a href="./order.php" class="order-btn nav-order-btn">Заказать</a>
         </nav>
 
@@ -83,9 +83,10 @@
             <span class="close">&times;</span>
 
             <h2 id="modal-title">Оформление заказа</h2>
-
+            <div id="order-message" style="display:none; color:green; margin-bottom:15px;"></div>
         <form id="photo-form" class="modal-form" method="POST" action="../server/order_handler.php">
             <input type="hidden" name="service_name" id="photo-service-name">
+            <input type="hidden" name="service_id" id="photo-service-id">
             <input type="date" name="shootingdate" required>
             <input type="text" name="location" placeholder="Место съемки" required>
 
@@ -106,6 +107,7 @@
 
         <form id="doc-form" class="modal-form" method="POST" action="../server/order_handler.php">
             <input type="hidden" name="service_name" id="doc-service-name">
+            <input type="hidden" name="service_id" id="doc-service-id">
             <select name="format" id="format" required>
                 <option value="">Формат фото</option>
                 <?php
