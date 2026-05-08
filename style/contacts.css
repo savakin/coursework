@@ -13,7 +13,7 @@
     display: flex;
     gap: 50px;
     flex-wrap: wrap;
-    align-items: center; 
+    align-items: center;
 }
 
 /* инфо */
@@ -43,7 +43,7 @@
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-family: inherit; 
+    font-family: inherit;
 }
 
 .contacts-form textarea {
@@ -57,11 +57,11 @@
     color: white;
     border: none;
     cursor: pointer;
-    transition: background 0.2s; 
+    transition: background 0.2s;
 }
 
 .contacts-form button:hover {
-    background: #333; 
+    background: #333;
 }
 
 /* ===== КАРТА ===== */
@@ -81,11 +81,11 @@
     .contacts-container {
         align-items: stretch;
     }
-    
+
     .contacts-page {
         padding: 30px 5%;
     }
-    
+
     .map-section {
         padding: 30px 5%;
     }

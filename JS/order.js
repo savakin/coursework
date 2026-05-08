@@ -28,11 +28,10 @@ function openModal(serviceName, formType, price = 0, serviceId = 0) {
     currentPrice = price;
     currentServiceId = serviceId;
     modalTitle.textContent = serviceName;
-    
-    // Скрываем все формы
+
     photoForm.style.display = 'none';
     docForm.style.display = 'none';
-    
+
     if (formType === 'photo') {
         photoForm.style.display = 'block';
         document.getElementById('photo-service-name').value = serviceName;
@@ -44,7 +43,7 @@ function openModal(serviceName, formType, price = 0, serviceId = 0) {
         document.getElementById('doc-service-id').value = serviceId;
         calculateDocPrice();
     }
-    
+
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
@@ -64,7 +63,7 @@ if (serviceType && services[serviceType]) {
 
 // Назначение обработчиков для кнопок услуг
 serviceBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
         const type = this.getAttribute('data-type');
         const serviceName = this.textContent.trim();
         const price = Number(this.dataset.price) || 0;
@@ -77,7 +76,7 @@ serviceBtns.forEach(btn => {
 function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
-    
+
     if (photoForm) {
         photoForm.reset();
         document.getElementById('photo-total').textContent = '0';
@@ -90,8 +89,7 @@ function closeModal() {
     }
     currentPrice = 0;
     currentServiceId = 0;
-    
-    // Убираем параметр из URL
+
     if (serviceType) {
         window.history.replaceState({}, document.title, window.location.pathname);
     }
@@ -146,55 +144,55 @@ if (photoQty) {
 
 // ===== AJAX-ОТПРАВКА ФОРМ =====
 function handleFormSubmit(form, priceInputId, totalSpanId) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         const priceInput = document.getElementById(priceInputId);
         if (!priceInput || !priceInput.value || priceInput.value === '0') {
             alert('Пожалуйста, заполните все обязательные поля и проверьте стоимость.');
             return;
         }
-        
+
         const formData = new FormData(form);
         const msgDiv = document.getElementById('order-message');
         if (msgDiv) msgDiv.style.display = 'none';
-        
+
         fetch(form.action, {
             method: 'POST',
             body: formData
         })
-        .then(response => response.text())
-        .then(data => {
-            if (msgDiv) {
-                msgDiv.style.display = 'block';
-                if (data.includes('успешно') || data.toLowerCase().includes('success')) {
-                    msgDiv.textContent = 'Заказ успешно оформлен!';
-                    msgDiv.style.color = 'green';
-                    // Сброс формы и закрытие через 2 секунды
-                    form.reset();
-                    if (totalSpanId === 'photo-total') {
-                        document.getElementById('photo-total').textContent = '0';
+            .then(response => response.text())
+            .then(data => {
+                if (msgDiv) {
+                    msgDiv.style.display = 'block';
+                    if (data.includes('успешно') || data.toLowerCase().includes('success')) {
+                        msgDiv.textContent = 'Заказ успешно оформлен!';
+                        msgDiv.style.color = 'green';
+                        // Сброс формы и закрытие через 2 секунды
+                        form.reset();
+                        if (totalSpanId === 'photo-total') {
+                            document.getElementById('photo-total').textContent = '0';
+                        } else {
+                            document.getElementById('total-price').textContent = '0';
+                        }
+                        priceInput.value = '0';
+                        setTimeout(() => {
+                            closeModal();
+                            if (msgDiv) msgDiv.style.display = 'none';
+                        }, 2000);
                     } else {
-                        document.getElementById('total-price').textContent = '0';
+                        msgDiv.textContent = 'Ошибка: ' + data;
+                        msgDiv.style.color = 'red';
                     }
-                    priceInput.value = '0';
-                    setTimeout(() => {
-                        closeModal();
-                        if (msgDiv) msgDiv.style.display = 'none';
-                    }, 2000);
-                } else {
-                    msgDiv.textContent = 'Ошибка: ' + data;
+                }
+            })
+            .catch(error => {
+                if (msgDiv) {
+                    msgDiv.style.display = 'block';
+                    msgDiv.textContent = 'Ошибка сети: ' + error.message;
                     msgDiv.style.color = 'red';
                 }
-            }
-        })
-        .catch(error => {
-            if (msgDiv) {
-                msgDiv.style.display = 'block';
-                msgDiv.textContent = 'Ошибка сети: ' + error.message;
-                msgDiv.style.color = 'red';
-            }
-        });
+            });
     });
 }
 

@@ -61,8 +61,8 @@
 .modal-form {
     display: none;
     flex-direction: column;
-    align-items: center; 
-    gap: 15px;  
+    align-items: center;
+    gap: 15px;
 }
 
 .modal-form.active {
@@ -72,13 +72,13 @@
 input,
 select,
 textarea {
-    width: 100%; 
+    width: 100%;
     padding: 12px 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-family: inherit;
     font-size: 1rem;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 textarea {
@@ -87,7 +87,7 @@ textarea {
 }
 
 button[type="submit"] {
-    width: 100%; 
+    width: 100%;
     padding: 14px;
     background: black;
     color: white;

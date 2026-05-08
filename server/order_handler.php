@@ -13,7 +13,6 @@ if (empty($name) || empty($phone)) {
     die("Имя или телефон не получены");
 }
 // ===== ОПРЕДЕЛЯЕМ id_typeservice =====
-// Теперь получаем ID из скрытого поля или по имени
 $service_id = $_POST['service_id'] ?? null;
 
 if ($service_id) {

@@ -17,7 +17,7 @@ let slideInterval;
 
 function showSlide(i) {
     if (!slides.length) return;
-    
+
     slides.forEach(slide => slide.classList.remove("active"));
     if (slides[i]) {
         slides[i].classList.add("active");
@@ -42,7 +42,7 @@ if (prevBtn && nextBtn) {
         prevSlide();
         resetAutoSlide();
     });
-    
+
     nextBtn.addEventListener("click", () => {
         nextSlide();
         resetAutoSlide();
@@ -52,7 +52,7 @@ if (prevBtn && nextBtn) {
 // Автопрокрутка
 function startAutoSlide() {
     if (slides.length > 1) {
-        slideInterval = setInterval(nextSlide, 8000); 
+        slideInterval = setInterval(nextSlide, 8000);
     }
 }
 
